@@ -1,9 +1,10 @@
-import connection from './connection';
 import IProduct from '../Interfaces/productsInterface';
+import productsModel from '../Models/productsModel';
 
 const getAllProducts = async (): Promise<IProduct[]> => {
-  const [products] = await connection.execute('SELECT * FROM Trybesmith.Products');
-  return products as IProduct[];
+  const allProducts = await productsModel.getAllProducts();
+
+  return allProducts;
 };
 
 export default {
