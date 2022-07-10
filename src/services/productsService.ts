@@ -7,13 +7,13 @@ const getAllProducts = async (): Promise<IProduct[]> => {
   return allProducts;
 };
 
-const createProduct = async (product: IProduct): Promise<IProduct> => {
-  const { insertId } = await productsModel.createProduct(product);
+const createProduct = async (name: string, amount: string): Promise<IProduct> => {
+  const { insertId } = await productsModel.createProduct(name, amount);
 
   const newProduct: IProduct = {
     id: insertId,
-    name: product.name,
-    amount: product.amount,
+    name,
+    amount,
     orderId: null,
   };
 
