@@ -1,8 +1,20 @@
 import express from 'express';
-import usersService from '../services/usersService';
+import usersController from '../controllers/usersController';
+import {
+  validateNewUserClass,
+  validateNewUserLevel,
+  validateNewUserName,
+  validateNewUserPwd } from '../middlewares/newUserMiddleware';
 
 const usersRouter = express.Router();
 
-usersRouter.post('/', usersService.createUser);
+usersRouter.post(
+  '/',
+  validateNewUserName,
+  validateNewUserClass,
+  validateNewUserLevel,
+  validateNewUserPwd,
+  usersController.createUser,
+);
 
 export default usersRouter;
