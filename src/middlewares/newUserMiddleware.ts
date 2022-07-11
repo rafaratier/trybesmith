@@ -46,7 +46,7 @@ export const validateNewUserClass = async (req: Request, res: Response, next: Ne
 export const validateNewUserLevel = async (req: Request, res: Response, next: NextFunction) => {
   const { level } = req.body;
 
-  if (!level) {
+  if (level === undefined) {
     next(ApiErrors.badRequest({ message: '"level" is required' }));
     return;
   }
@@ -55,9 +55,10 @@ export const validateNewUserLevel = async (req: Request, res: Response, next: Ne
     next(ApiErrors.unprocessableEntity({ message: '"level" must be a number' }));
     return;
   }
-  if (level < 1) {
+
+  if (Number(level) < 1) {
     next(ApiErrors
-      .unprocessableEntity({ message: '"level" length must be greater than or equal to 1' }));
+      .unprocessableEntity({ message: '"level" must be greater than or equal to 1' }));
     return;
   }
 
